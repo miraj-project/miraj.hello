@@ -1,19 +1,31 @@
-# hello-polymer
+hello-polymer
+=============
 
-FIXME
+Sample program using miraj.html and polymer.paper.
 
-## Prerequisites
+
+== Prerequisites
 
 You will need [Leiningen][] 2.0.0 or above installed.
 
 [leiningen]: https://github.com/technomancy/leiningen
 
-## Running
+## Configuration
 
-To start a web server for the application, run:
+Following the instructions at
+link:https://www.polymer-project.org/1.0/docs/start/getting-the-code.html[Get
+the Polymer Library], install Bower.
 
-    lein ring server
+In `resources/public`, run `$ bower install`.  The `bower.json` file
+in that directory will control bower; the result will be a bunch of
+polymer resources in `resources/public/bower_components`.
+
+From the project root directory, start a web server for the application:
+
+    lein ring server  (or lein ring server-headless)
+
+Access the app at `localhost:3000`
 
 ## License
 
-Copyright © 2015 FIXME
+Copyright © 2015 Gregg Reynolds
