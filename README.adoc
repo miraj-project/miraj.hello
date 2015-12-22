@@ -1,7 +1,8 @@
 hello-polymer
 =============
 
-Sample program using miraj.html and polymer.paper.
+Sample program using miraj.html and polymer.paper.  Based on a vanilla
+compojure app.
 
 
 == Prerequisites
