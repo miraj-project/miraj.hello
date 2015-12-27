@@ -21,6 +21,10 @@ In `resources/public`, run `$ bower install`.  The `bower.json` file
 in that directory will control bower; the result will be a bunch of
 polymer resources in `resources/public/bower_components`.
 
+If you want to add polymer components, go to the link:https://elements.polymer-project.org/[online Polymer catalog], find the Bower command you need, and execute it from `resources/public`.  For example, to install `iron-icon`, the command is `bower install --save PolymerElements/iron-icon`.
+
+*CAVEAT:* if you use Polymer elements in your webpage without installing the Polymer components using bower you will not get a warning.  Your webpage just won't work.  Always check the network downloads to see if you're asking for a Polymer component that hasn't been installed.
+
 From the project root directory, start a web server for the application:
 
     lein ring server  (or lein ring server-headless)

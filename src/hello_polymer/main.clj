@@ -1,9 +1,11 @@
-(ns hello-polymer.handler
+(ns hello-polymer.main
   (:require [miraj.html :as h]
             [polymer.paper :as paper]
+            [hello-polymer.miraj :as hm]
             [compojure.core :refer :all]
             [compojure.route :as route]
-            [ring.middleware.defaults :refer [wrap-defaults site-defaults]]))
+            [ring.middleware.defaults :refer [wrap-defaults site-defaults]] :reload-all))
+
 
 (def homepage
   (h/html
@@ -19,8 +21,10 @@
                                   :url "http://example.org/"}
                           :web-app-capable true}})
     (h/link {:rel "stylesheet" :type "text/css" :href "styles/hello.css"})
+
     (h/link {:rel "import" :href "bower_components/paper-button/paper-button.html"})
     (h/link {:rel "import" :href "bower_components/paper-card/paper-card.html"}))
+
    (h/body
     (h/h1 "Hello Polymer!")
     (h/div {:id "cards"}
@@ -32,6 +36,9 @@
 (defroutes app-routes
   (GET "/" []
        (miraj.markup/serialize homepage))
+
+  (GET "/miraj" []
+       (miraj.markup/serialize hello-polymer.miraj/homepage))
 
   (route/not-found "Not Found"))
 
