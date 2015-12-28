@@ -22,10 +22,10 @@
 
    ;; PROBLEM: distinguish css refs from shared style refs
    ;; delegate to config spec?
-   (h/import #_(styles hello world)
+   (h/import '(styles hello world)
              #_(html-imports hello world)
-             '(styles.shared foo bar))
-             '(scripts polyfill-lite))
+             #_(styles.shared foo bar)
+             #_(scripts polyfill-lite))
 
    (h/body
     (h/h1 "Hello Polymer!")
