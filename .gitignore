@@ -1,4 +1,8 @@
+materialize/
+
+/dev-resources/public/bower_components
 /resources/public/bower_components
+
 /target
 /lib
 /classes
