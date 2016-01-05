@@ -3,6 +3,12 @@
 (alter-meta! *ns*
              (fn [m] (assoc m :co-ns true :resource-type :js)))
 
+(def app {:uri "scripts/app.js"})
+
+(def page {:uri "bower_components/page/page.js"})
+
+(def routing {:uri "scripts/routing.js"})
+
 (def polyfill {:uri "bower_components/webcomponentsjs/webcomponents.js"})
 (def polyfill-min {:uri "bower_components/webcomponentsjs/webcomponents.min.js"})
 

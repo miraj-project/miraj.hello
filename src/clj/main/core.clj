@@ -1,6 +1,7 @@
-(ns hello.main
-  (:require [hello.primitives :as prim]
-            [hello.mirajified :as m]
+(ns core
+  (:require [hello.miraj.html.core :as h]
+            [hello.miraj.polymer.core :as p]
+            [hello.psk.core :as psk]
             [compojure.core :refer :all]
             [compojure.route :as route]
             [ring.middleware.defaults :refer [wrap-defaults site-defaults]]))
@@ -8,11 +9,14 @@
 (defroutes app-routes
   ;; (GET "/" [] index.html)
 
-  (GET "/primitives" []
-       (hello.primitives/homepage))
+  (GET "/html" []
+       (h/homepage))
 
-  (GET "/miraj" []
-       (hello.mirajified/homepage))
+  (GET "/polymer" []
+       (p/homepage))
+
+  (GET "/psk" []
+       psk/homepage)
 
   (route/not-found "Not Found"))
 

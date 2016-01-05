@@ -1,4 +1,4 @@
-(ns hello.mirajified
+(ns hello.miraj.polymer.core
   (:require [miraj.html :as h]
             [compojure.core :refer :all]
             [compojure.route :as route]

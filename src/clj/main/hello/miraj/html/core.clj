@@ -1,4 +1,4 @@
-(ns hello.primitives
+(ns hello.miraj.html.core
   (:require [miraj.html :as h]
             ;; [polymer.paper :as paper]
             [compojure.core :refer :all]

@@ -1,7 +1,11 @@
 (ns styles.shared)
 
-(def uri "shared-styles/foo.html")
+(alter-meta! *ns*
+             (fn [m] (assoc m
+                            :co-ns true
+                            :resource-type :polymer-style-module)))
 
-(def foo "foo-style") ;; foo-style is in foo.html
 
-(def bar "bar-style") ;; ditto
+(def uri "styles/shared.html")
+
+(def psk "psk-style")                   ; a dom-module in styles/shared.html
