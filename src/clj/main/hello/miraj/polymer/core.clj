@@ -29,7 +29,6 @@
                                :url "http://example.org/"}
                        :web-app-capable true}}})
 
-
 (def home-html
     (h/html
      (h/require '[polymer.paper :as paper :refer [button card]]
@@ -38,9 +37,9 @@
                '(scripts polyfill-lite-min))
      (h/body
       (h/h1 "Hello Polymer!")
-      (h/div (iron/icon {:icon "menu"}))
+      (h/div #_(iron/icon {:icon "menu"}))
       (h/div ::cards
-             (paper/card {:heading "Hello, you ol' Card!"}
+             #_(paper/card {:heading "Hello, you ol' Card!"}
                          (h/div {:class "card-content"} "Some content")
                          (h/div {:class "card-actions"}
                                 (paper/button {:raised nil} "Some action")))))))

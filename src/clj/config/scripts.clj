@@ -5,6 +5,8 @@
 
 (def app {:uri "scripts/app.js"})
 
+(def main {:uri "scripts/main.js"})
+
 (def page {:uri "bower_components/page/page.js"})
 
 (def routing {:uri "scripts/routing.js"})

@@ -1,13 +1,20 @@
 (ns hello.psk.core
   (:require [miraj.html :as h]
-             [polymer.iron :as iron :refer [flex-layout icons pages selector]]
-             [polymer.paper :as paper :refer [drawer-panel icon-button item material menu
-                                              scroll-header-panel toast toolbar]]
-             [polymer.platinum.service-worker :as sw :refer [cache register]]
-             ;; [components [my-greeting my-list]])
+            ;; [polymer.iron :as iron :refer [flex-layout icons pages selector]]
+            ;; [polymer.paper :as paper :refer [drawer-panel icon-button item material menu
+            ;;                                  scroll-header-panel toast toolbar]]
+            [polymer.platinum.service-worker :as sw :refer [cache register]]
+            ;; [hello.psk.components :as comp :refer [my-greeting my-list]]
             [compojure.core :refer :all]
             [compojure.route :as route]
             [ring.middleware.defaults :refer [wrap-defaults site-defaults]]))
+
+(h/require '[polymer.iron :as iron :refer [flex-layout icons pages selector]]
+           '[polymer.paper :as paper :refer [drawer-panel icon-button item material menu
+                                             scroll-header-panel toast toolbar]]
+            ;; [polymer.platinum.service-worker :as sw :refer [cache register]]
+           ;; [polymer.platinum :as plat :refer [sw-cache sw-register]]
+           '[hello.psk.components :as comp :refer [my-greeting my-list]])
 
 (def homepage-meta
   {:charset "utf-8"
@@ -28,7 +35,6 @@
                                 :status-bar-style "black"
                                 :title "Miraj: Polymer Starter Kit"}
                       :touch-icon {:uri "images/touch/apple-touch-icon.png"}}}})
-
 
 (def header-panel
   (paper/scroll-header-panel
@@ -68,10 +74,11 @@
 (def section-home
   (h/section {:data-route "home"}
     (paper/material {:elevation 1}
-      ;; (my-greeting)
+
+      (comp/my-greeting)
 
       (h/p ::paper-font-subhead "You now have: ")
-      ;; (my-list)
+      (comp/my-list)
 
       (h/p ::paper-font-body2 "Looking for more Web App layouts? Check out our "
            (h/a {:href "https://github.com/PolymerElements/app-layout-templates"}
@@ -135,7 +142,6 @@
                 (sw/cache {:default-cache-strategy "fastest"
                            :cache-config-file "cache-config.json"}))))
 
-(println "def'ing main area")
 (def main-area
   (paper/scroll-header-panel ::headerPanelMain
                              {:main nil :condenses nil
@@ -151,7 +157,8 @@
             section-user-info
             section-contact))))
 
-(println "def'ing homepage-html")
+
+
 (def homepage-html
 (h/html {:lang "en"}
  (h/head
@@ -159,16 +166,17 @@
              '[polymer.paper :as paper :refer [drawer-panel icon-button item material menu
                                               scroll-header-panel toast toolbar]]
              ;; [polymer.platinum :as plat :refer [sw-cache sw-register]]
-             #_[components [my-greeting my-list]])
+             '[hello.psk.components :as comp :refer [my-greeting my-list]])
+  ;; (h/link {:href "components/my-greeting-impl" :rel "import"})
   (h/import '(styles main)
             '(styles.shared psk)
             '(themes app)
-            '(scripts polyfill-lite-min
+            '(scripts main
+                      polyfill-lite-min
                       app
                       page
                       routing
                       )))
-
   (h/body ::.fullbleed.layout.vertical {:unresolved nil}
    (h/span ::browser-sync-binding)
    (h/template
@@ -183,14 +191,10 @@
               "Ok"))
     #_service-worker))))
 
-(println "defn'ing homepage")
 (def homepage
   (-> homepage-html
       (with-meta homepage-meta)
       h/normalize
       h/optimize
       h/serialize))
-
-
-
 

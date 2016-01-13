@@ -5,7 +5,12 @@
                             :co-ns true
                             :resource-type :polymer-style-module)))
 
+(def pfx "styles")
 
-(def uri "styles/shared.html")
+(def uri "shared.html")
 
-(def psk "psk-style")                   ; a dom-module in styles/shared.html
+;; dom-modules in styles/shared.html
+
+(def psk "psk-style")
+
+(def psk "shared-styles")
