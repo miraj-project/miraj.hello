@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+    <head>
+        <meta name="charset" content="utf-8">
+        <link rel="import" href="bower_components/iron-ajax/iron-ajax.html">
+        <link rel="import" href="bower_components/iron-image/iron-image.html">
+        <meta name="title" content="iron-ajax">
+        <style>
+    iron-image {
+      background-color: lightgray;
+      margin: 1em;
+    }
+    .horizontal-section {
+      max-width: 300px;
+      margin-bottom: 24px;
+    }</style>
+    </head>
+    <body unresolved>
+        <h1>VIDEO FEED</h1>
+        <div class="horizontal-section-container">
+            <template is="dom-bind" id="app">
+                <iron-ajax auto
+		url="https://www.googleapis.com/youtube/v3/search"
+                params='{"part":"snippet",
+		"q":"polymer",
+		"key": "AIzaSyAuecFZ9xJXbGDkQYWBmYrtzOGJD-iDIgI",
+		"type": "video"}'
+		handle-as="json" last-response="{{ajaxResponse}}"></iron-ajax>
+                <template is="dom-repeat" items="[[ajaxResponse.items]]">
+                    <div class="horizontal-section">
+                        <h2>
+                            <a href="[[url(item.id.videoId)]]" target="_blank">[[item.snippet.title]]</a>
+                        </h2>
+                        <iron-image src="[[item.snippet.thumbnails.high.url]]" width="256" height="256" preload fade sizing="cover"></iron-image>
+                        <p>[[item.snippet.description]]</p>
+                    </div>
+                </template>
+            </template>
+        </div>
+        <script>
+    var app = document.querySelector('#app');
+
+    app.url = function (videoId) {
+      return 'https://www.youtube.com/watch?v=' + videoId;
+    }; </script>
+    </body>
+</html>
+

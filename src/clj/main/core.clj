@@ -2,6 +2,7 @@
   (:require [hello.miraj.html.core :as h]
             [hello.miraj.polymer.core :as p]
             [hello.psk.core :as psk]
+            [hello.psk.ajax :as ajax]
             [hello.psk.components :as hello]
             [miraj.markup :as miraj]
             [compojure.core :refer :all]
@@ -20,6 +21,9 @@
 
   (GET "/psk" []
        psk/homepage)
+
+  ;; (GET "/ajax" []
+  ;;      ajax/homepage)
 
   (GET "/hello/psk/components/my-greeting" []
        (let [result (miraj/<<! hello.psk.components/my-greeting)]
