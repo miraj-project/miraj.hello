@@ -9,6 +9,8 @@
             [compojure.route :as route]
             [ring.middleware.defaults :refer [wrap-defaults site-defaults]]))
 
+;;FIXME: make this a fwd declaration e.g. (declare iron/flex-layout)?
+;;Either that or require that defpage come first and forward declare components.
 (h/require '[polymer.iron :as iron :refer [flex-layout icons pages selector]]
            '[polymer.paper :as paper :refer [drawer-panel icon-button item material menu
                                              scroll-header-panel toast toolbar]]
@@ -157,35 +159,49 @@
             section-user-info
             section-contact))))
 
-
-
 (def homepage-html
-(h/html {:lang "en"}
- (h/head
-  (h/require '[polymer.iron :as iron :refer [flex-layout icons pages selector]]
-             '[polymer.paper :as paper :refer [drawer-panel icon-button item material menu
+  (h/html {:lang "en"} ;;FIXME: with defpage we do not need this elt
+          (h/head ;;FIXME: do we need an explicit head elt?
+           ;; with defpage this can be (:require ...)?
+           (h/require '[polymer.iron :as iron :refer [flex-layout icons pages selector]]
+                      '[polymer.paper :as paper :refer [drawer-panel icon-button item material menu
+                                                        scroll-header-panel toast toolbar]]
+                      ;; [polymer.platinum :as plat :refer [sw-cache sw-register]]
+                      '[hello.psk.components :as comp :refer [my-greeting my-list]])
+           ;; (h/link {:href "components/my-greeting-impl" :rel "import"})
+           (h/import '(styles main)              ;;FIXME use [ ] instead?
+                     '(styles.shared psk)
+                     '(themes app)
+                     '(scripts main
+                               polyfill-lite-min
+                               app
+                               page
+                               routing
+                               )))))
+
+(defpage homepage {:lang "en"}
+  (:require '[polymer.iron :as iron :refer [flex-layout icons pages selector]]
+            '[polymer.paper :as paper :refer [drawer-panel icon-button item material menu
                                               scroll-header-panel toast toolbar]]
-             ;; [polymer.platinum :as plat :refer [sw-cache sw-register]]
-             '[hello.psk.components :as comp :refer [my-greeting my-list]])
-  ;; (h/link {:href "components/my-greeting-impl" :rel "import"})
-  (h/import '(styles main)
-            '(styles.shared psk)
-            '(themes app)
-            '(scripts main
-                      polyfill-lite-min
-                      app
-                      page
-                      routing
-                      )))
-  (h/body ::.fullbleed.layout.vertical {:unresolved nil}
-   (h/span ::browser-sync-binding)
-   (h/template
+            '[hello.psk.components :as comp :refer [my-greeting my-list]])
+  (:import '(styles main)
+           '(styles.shared psk)
+           '(themes app)
+           '(scripts main
+                     polyfill-lite-min
+                     app
+                     page
+                     routing
+                     ))
+  (body ::.fullbleed.layout.vertical {:unresolved nil}
+   (span ::browser-sync-binding)
+   (template
     ::app {:is "dom-bind"}
     (paper/drawer-panel ::paperDrawerPanel
       header-panel
       main-area)
     (paper/toast ::toast
-      (h/span ::.toast-hide-button {:role "button"
+      (span ::.toast-hide-button {:role "button"
                                     :tabindex 0
                                     :onclick "app.$.toast.hide()"}
               "Ok"))
